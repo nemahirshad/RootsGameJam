@@ -8,11 +8,9 @@ public class GroundCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Help");
         if (other.CompareTag("Ground"))
         {
             pfc.ground = true;
-            print("lol");
         }
     }
 }

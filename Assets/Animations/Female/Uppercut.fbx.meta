@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0225ae36a5426e641999678b9598d58f
+guid: ef941f9ca52258f41bc5707a34b590f6
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -37,7 +37,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 50
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -56,7 +56,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.25848565
+        functionName: ActivateHitbox
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 2
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.50391644
+        functionName: DeactivateHitbox
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 2
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
