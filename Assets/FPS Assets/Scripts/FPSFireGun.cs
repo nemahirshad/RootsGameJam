@@ -21,8 +21,6 @@ public class FPSFireGun : MonoBehaviour
         {
             Shoot();
         }
-
-        //Shoot();
     }
 
     void Shoot()

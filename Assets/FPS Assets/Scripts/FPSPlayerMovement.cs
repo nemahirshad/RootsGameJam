@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class FPSPlayerMovement : MonoBehaviour
 {
@@ -17,6 +19,10 @@ public class FPSPlayerMovement : MonoBehaviour
 
     public Transform orientation;
 
+    public TextMeshProUGUI healthTxt;
+    
+    public float myHealth;
+
     float horizontalInput;
     float verticalInput;
 
@@ -32,6 +38,12 @@ public class FPSPlayerMovement : MonoBehaviour
 
     Rigidbody myRb;
 
+    public void TakeDamage(float damageTaken)
+    {
+        myHealth -= damageTaken;
+        print(myHealth);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +54,8 @@ public class FPSPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthTxt.text = myHealth.ToString("000");
+
         isGrounded = Physics.Raycast(transform.position, Vector3.down, raycastLength, groundLayer);
 
         PlayerInput();
