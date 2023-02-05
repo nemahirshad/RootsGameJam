@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Playermovement : MonoBehaviour
 {
@@ -10,20 +12,24 @@ public class Playermovement : MonoBehaviour
     bool isFacingRight = true;
     public float maxJump;
     public float jumpCounter;
+    public Animator animator;   
 
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundLayer;
-
+    [SerializeField] LayerMask enemyLayer;
 
     // Update is called once per frame
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
+
         if (IsGrounded())
         {
             jumpCounter = 0;
+            animator.SetTrigger("Land");
         }
 
         if (Input.GetButtonDown ("Jump") && jumpCounter < maxJump)
@@ -31,6 +37,7 @@ public class Playermovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
 
             jumpCounter++;
+            animator.SetTrigger("Jump");
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0f)
@@ -43,15 +50,11 @@ public class Playermovement : MonoBehaviour
         Flip();
     }
 
-    void FixedUpdate()
-    {
-        
-    }
-
     bool IsGrounded()
     { 
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
+
 
     void Flip()
     { 
@@ -61,6 +64,19 @@ public class Playermovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Head"))
+        {
+            Destroy(collision.transform.parent.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene("RootofPlatformer");
         }
     }
 }
