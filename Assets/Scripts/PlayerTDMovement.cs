@@ -17,7 +17,6 @@ public class PlayerTDMovement : MonoBehaviour
 
     private void Start()
     {
-        //myStats = GetComponent<PlayerStats>();
         //anim = GetComponent<Animator>();
     }
 

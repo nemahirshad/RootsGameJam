@@ -15,15 +15,14 @@ public class PlayerTDCombat : MonoBehaviour
 
     public int maxHealth;
 
-    float cooldown;
-
     int health;
 
     [SerializeField] HeartSystem heartSystem;
 
     private void Start()
     {
-
+        health = maxHealth;
+        heartSystem.DrawHearts(health, maxHealth);
     }
 
     // Update is called once per frame
@@ -32,13 +31,13 @@ public class PlayerTDCombat : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Attack();
-            playSoundMelee.Play();
+            //playSoundMelee.Play();
         }
     }
 
     void Attack()
     {
-        animator.SetTrigger("Attack");
+        //animator.SetTrigger("Attack");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
@@ -63,6 +62,15 @@ public class PlayerTDCombat : MonoBehaviour
         {
             health -= dmg;
             heartSystem.DrawHearts(health, maxHealth);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(1);
+            Destroy(other.gameObject);
         }
     }
 }
