@@ -10,8 +10,6 @@ public class FPSEnemy : MonoBehaviour
     public float myDamage;
     public float speed;
 
-    Vector3 newPos;
-
     void Start()
     {
 
@@ -25,9 +23,7 @@ public class FPSEnemy : MonoBehaviour
             Destroy(gameObject);
         }
         transform.LookAt(thePlayer.transform);
-        newPos = Vector3.MoveTowards(transform.position, thePlayer.transform.position, speed * Time.deltaTime);
-
-        transform.position = new Vector3(newPos.x, newPos.y - 1, newPos.z);
+        transform.position = Vector3.MoveTowards(transform.position, thePlayer.transform.position, speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
